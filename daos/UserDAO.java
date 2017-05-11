@@ -10,12 +10,20 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
+/**
+ * UserDAO is a realization of interface DAO with his own fields and methods that can add,
+ * remove and edit User in User's DataBase.
+ */
 public class UserDAO implements DAO<User>{
     private static UserDAO userDAO;
     private List<User> usersBase = new ArrayList<>();
     private File file;
 
     //Singletone
+    /**
+     * getUserDAO method provides access to get users from User's DataBase.
+     * @return user from User's DataBase.
+     */
     public static UserDAO getUserDAO() {
         if (userDAO == null) {
             userDAO = new UserDAO();
@@ -24,7 +32,9 @@ public class UserDAO implements DAO<User>{
     }
 
 
-    //Create file for storing users
+     /**
+     * UserDAO method creates file for saving users in User's DataBase.
+     */
     private UserDAO() {
         try {
             file = new File("src/finalProject/dataBase/userBase.txt");
@@ -55,8 +65,11 @@ public class UserDAO implements DAO<User>{
 
     }
 
-    //method writes information to userBase.txt
-
+    /**
+     * writeToFile method writes data in a User's DataBase.
+     * @param file - file to write information to userBase.txt
+     * @param list - list of users from User's DataBase.
+     */
     private boolean writeToFile(File file, List<User> list) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream(file)))) {
@@ -73,7 +86,9 @@ public class UserDAO implements DAO<User>{
         return true;
     }
 
-    //method check valid of data
+    /**
+     * ValidInspect method checks the availability of the user in the database.
+     */
     private boolean validInspect(User user) {
         boolean notValid = false;
         if ((user.getName() == null) || user.getName().equals("") ||
@@ -83,6 +98,10 @@ public class UserDAO implements DAO<User>{
         return notValid;
     }
 
+    /**
+     * Add method adds user to User's DataBase.
+     * @param user - user to be added.
+     */
     @Override
     public boolean add(User user) {
         try {
@@ -108,6 +127,10 @@ public class UserDAO implements DAO<User>{
         return true;
     }
 
+    /**
+     * edit method allows to adjust data in User's DataBase.
+     * @param user - user to edit from User's DataBase.
+     */
     @Override
     public boolean edit(User user) {
         try {
@@ -131,6 +154,10 @@ public class UserDAO implements DAO<User>{
         return true;
     }
 
+    /**
+     * Remove method allows to remove user from User's DataBase.
+     * @param user - user to remove from User's DataBase.
+     */
     @Override
     public boolean remove(User user) {
         if (usersBase.contains(user)) {
@@ -153,6 +180,9 @@ public class UserDAO implements DAO<User>{
         return false;
     }
 
+    /**
+     * getBase method allows to return list of Users from User's DataBase
+     */
     @Override
     public List<User> getBase() {
         return usersBase;

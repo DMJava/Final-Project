@@ -12,12 +12,20 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
+/**
+ * RoomDAO is a realization of interface DAO with his own fields and methods that can add,
+ * remove and edit Room in Room's DataBase.
+ */
 public class RoomDAO implements DAO<Room>{
     private static RoomDAO roomDAO;
     private List<Room> roomList = new ArrayList<>();
     private File file;
 
     //Singleton
+    /**
+     * getRoomDAO method provides access to get rooms from Room's DataBase.
+     * @return room from Room's DataBase.
+     */
     public static RoomDAO getRoomDAO() {
         if (roomDAO == null) {
             roomDAO = new RoomDAO();
@@ -25,7 +33,9 @@ public class RoomDAO implements DAO<Room>{
         return roomDAO;
     }
 
-    //Creating file for saving rooms
+    /**
+     * RoomDAO method creates file for saving rooms in Room's DataBase.
+     */
     private RoomDAO() {
         try {
             file = new File("src/finalProject/dataBase/roomBase.txt");
@@ -80,6 +90,9 @@ public class RoomDAO implements DAO<Room>{
         }
     }
 
+    /**
+     * ValidInspect method checks the availability of the room in the database.
+     */
     private boolean validInspect(Room room) {
         boolean notValid = false;
         if ((room.getId() == 0) || (room.getPersons() == 0) || (room.getHotel() == null)) {
@@ -92,6 +105,11 @@ public class RoomDAO implements DAO<Room>{
         return file;
     }
 
+    /**
+     * writeToFile method writes data in a Room's DataBase.
+     * @param file - file to write.
+     * @param list - list of rooms from Room's DataBase.
+     */
     public boolean writerToFile(File file, List<Room> list) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             for (Room room : list) {
@@ -113,6 +131,10 @@ public class RoomDAO implements DAO<Room>{
         return true;
     }
 
+    /**
+     * Add method adds room to Room's DataBase.
+     * @param room - room to be added.
+     */
     @Override
     public boolean add(Room room) {
         if (!HotelDAO.getHotelDAO().getBase().contains(room.getHotel())) {
@@ -139,6 +161,10 @@ public class RoomDAO implements DAO<Room>{
         return true;
     }
 
+    /**
+     * edit method allows to adjust data in Room's DataBase.
+     * @param room - room to edit from Room's DataBase.
+     */
     @Override
     public boolean edit(Room room) {
 
@@ -165,6 +191,10 @@ public class RoomDAO implements DAO<Room>{
         return true;
     }
 
+    /**
+     * Remove method allows to remove room from Room's DataBase.
+     * @param room - room to remove from Room's DataBase.
+     */
     @Override
     public boolean remove(Room room) {
 
@@ -186,6 +216,9 @@ public class RoomDAO implements DAO<Room>{
         }
     }
 
+    /**
+     * getBase method allows to return list of Rooms from Room's DataBase
+     */
     @Override
     public List<Room> getBase() {
         return roomList;

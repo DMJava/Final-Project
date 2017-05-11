@@ -10,11 +10,20 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
-public class HotelDAO implements DAO<Hotel>{
+/**
+ * HotelDAO is a realization of interface DAO with his own fields and methods that can add,
+ * remove and edit Hotel in Hotel's DataBase.
+ */
+
+public class HotelDAO implements DAO<Hotel> {
     private static HotelDAO hotelDAO;
     private List<Hotel> hotelList = new ArrayList<>();
     private File file;
 
+    /**
+     * getHotelDAO method provides access to get hotels from Hotel's DataBase.
+     * @return hotel from Hotel's DataBase.
+     */
     public static HotelDAO getHotelDAO() {
         if (hotelDAO == null) {
             hotelDAO = new HotelDAO();
@@ -22,6 +31,9 @@ public class HotelDAO implements DAO<Hotel>{
         return hotelDAO;
     }
 
+    /**
+     * HotelDAO method creates file for saving hotels in Hotel's DataBase.
+     */
     private HotelDAO() {
         try {
             file = new File("src/finalProject/dataBase/hotelBase.txt");
@@ -54,6 +66,9 @@ public class HotelDAO implements DAO<Hotel>{
         }
     }
 
+    /**
+     * ValidInspect method checks the availability of the hotel in the database.
+     */
     private boolean validInspect(Hotel hotel) {
         boolean notValid = false;
         if ((hotel.getId() == 0) || (hotel.getCity() == null || hotel.getCity().equals(""))
@@ -62,6 +77,11 @@ public class HotelDAO implements DAO<Hotel>{
         }
         return notValid;
     }
+
+    /**
+     * Add method adds hotel to Hotel's DataBase.
+     * @param hotel - hotel to be added.
+     */
 
     @Override
     public boolean add(Hotel hotel) {
@@ -90,6 +110,11 @@ public class HotelDAO implements DAO<Hotel>{
         return true;
     }
 
+    /**
+     * writeToFile method writes data in a Hotel's DataBase.
+     * @param file - file to write.
+     * @param list - list of hotels from Hotel's DataBase.
+     */
     private boolean writeToFile(File file, List<Hotel> list) {
         StringBuilder stringBuilder = new StringBuilder();
         list.stream().forEach(hotelFromList ->
@@ -104,6 +129,10 @@ public class HotelDAO implements DAO<Hotel>{
         return true;
     }
 
+    /**
+     * edit method allows to adjust data in Hotel's DataBase.
+     * @param hotel - hotel to edit from Hotel's DataBase.
+     */
     @Override
     public boolean edit(Hotel hotel) {
         try {
@@ -127,6 +156,10 @@ public class HotelDAO implements DAO<Hotel>{
         return true;
     }
 
+    /**
+     * Remove method allows to remove hotel from Hotel's DataBase.
+     * @param hotel - hotel to remove from Hotel's DataBase.
+     */
     @Override
     public boolean remove(Hotel hotel) {
         if (!hotelList.contains(hotel)) {
@@ -153,6 +186,9 @@ public class HotelDAO implements DAO<Hotel>{
         }
     }
 
+    /**
+     * getBase method allows to return list of Hotels from Hotel's DataBase
+     */
     @Override
     public List<Hotel> getBase() {
         return hotelList;

@@ -13,6 +13,11 @@ import java.util.Map;
 
 import static Final_project.controller.Controller.*;
 
+/**
+ * Console class, with user and admin functionality
+ * (use admin/0000 to enter as admin)
+ */
+
 public class UserVsAdmin {
     public static void console() throws IOException {
         Controller controller = new Controller();

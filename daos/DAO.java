@@ -2,6 +2,10 @@ package Final_project.daos;
 
 import java.util.List;
 
+/**
+ * DAO - interface with methods for accessing the optional work with the Hotel, Room and User .
+ */
+
 public interface DAO<T> {
     boolean add(T t);
 

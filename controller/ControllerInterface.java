@@ -7,7 +7,9 @@ import Final_project.entities.User;
 import java.util.List;
 import java.util.Map;
 
+
 public interface ControllerInterface {
+
     boolean registerUser(User newUser);
 
     User enter(String name, String pass);

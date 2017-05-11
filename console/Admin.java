@@ -14,6 +14,9 @@ import java.util.Map;
 
 import static Final_project.controller.Controller.*;
 
+/**
+ * Here is administrator's entrance
+ */
 public class Admin {
     public static void root() throws IOException {
         Controller controller = new Controller();
@@ -362,7 +365,6 @@ public class Admin {
                     System.out.println("Are we keeping to add rooms?");
                 }
             }
-
             System.out.println("Incorrect input!\n");
         }
     }
