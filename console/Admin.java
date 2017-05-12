@@ -365,6 +365,7 @@ public class Admin {
                     System.out.println("Are we keeping to add rooms?");
                 }
             }
+
             System.out.println("Incorrect input!\n");
         }
     }
